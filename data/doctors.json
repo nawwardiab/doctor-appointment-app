@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Dr. John Doe",
+    "specialty": "Cardiology",
+    "availability": ["2024-11-25T09:00:00Z", "2024-11-25T11:00:00Z"]
+  },
+  {
+    "id": 2,
+    "name": "Dr. Jane Smith",
+    "specialty": "Dermatology",
+    "availability": ["2024-11-26T10:00:00Z", "2024-11-26T14:00:00Z"]
+  }
+]

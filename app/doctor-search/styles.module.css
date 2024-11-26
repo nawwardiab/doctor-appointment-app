@@ -1,0 +1,29 @@
+/* Add these styles to styles.module.css */
+.doctorSearchPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #121212; /* A dark background for a sleek look */
+}
+/* Add these to styles.module.css */
+.doctorSearchPage /* Add these to styles.module.css */
+h1 {
+  color: #ffffff;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 1px; /* Adds some space between letters */
+}
+
+.doctorList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px; /* Limits the width for better focus */
+  padding: 0 20px;
+}
