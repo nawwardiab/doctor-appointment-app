@@ -1,5 +1,5 @@
 "use client";
-import styles from "./styles.module.css";
+import styles from "./DoctorSearch.module.css";
 import { useEffect } from "react";
 import { useAppContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation"; // Use the new router API for Next.js 15
@@ -32,10 +32,8 @@ export default function DoctorSearch() {
   };
 
   const handleBookAppointment = (doctorId) => {
-    router.push({
-      pathname: "/appointment-booking",
-      query: { doctorId },
-    });
+    // Correcting the router.push function
+    router.push(`/appointment-booking?doctorId=${doctorId}`);
   };
 
   return (
