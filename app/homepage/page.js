@@ -4,6 +4,7 @@ import styles from "./HomePage.module.css";
 import CTASection from "@/components/homepage/CTASection";
 
 export default function HomePage() {
+  // Define an array of features to be displayed in InfoCards
   const features = [
     {
       title: "Optimal Access to Healthcare",
@@ -25,9 +26,12 @@ export default function HomePage() {
 
   return (
     <main className={styles.homepage}>
+      {/* Render the hero section at the top of the homepage */}
       <HeroSection />
+
       <section className={styles.infoCardsSection}>
         <div className={styles.infoCardsContainer}>
+          {/* Map through the features array and render an InfoCard for each */}
           {features.map((feature, index) => (
             <InfoCard
               key={index}
@@ -37,6 +41,7 @@ export default function HomePage() {
             />
           ))}
         </div>
+        {/* Render the Call-to-Action section */}
         <CTASection />
       </section>
     </main>

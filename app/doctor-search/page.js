@@ -9,8 +9,11 @@ import MapView from "@/components/MapView";
 import CalendarView from "@/components/CalendarView";
 
 export default function DoctorSearch() {
+  // Access global state and dispatch function from AppContext
   const { state, dispatch } = useAppContext();
   const router = useRouter();
+
+  // Local state for filters and view mode
   const [filters, setFilters] = useState({
     specialty: "",
     language: "",
@@ -19,6 +22,7 @@ export default function DoctorSearch() {
   });
   const [viewMode, setViewMode] = useState("list"); // 'list' or 'map'
 
+  // Fetch doctors data on component mount
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
@@ -26,6 +30,7 @@ export default function DoctorSearch() {
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
+        // Update global state with fetched doctors
         dispatch({ type: "SET_DOCTORS", payload: data });
       } catch (error) {
         console.error("Error fetching doctors:", error);
@@ -35,6 +40,7 @@ export default function DoctorSearch() {
     fetchDoctors();
   }, [dispatch]);
 
+  // Filter doctors based on selected filters
   const filteredDoctors = state.doctors.filter((doctor) => {
     return (
       (!filters.specialty || doctor.specialty === filters.specialty) &&
@@ -45,9 +51,11 @@ export default function DoctorSearch() {
 
   return (
     <div className={styles.doctorSearchPage}>
+      {/* Header section with title and view toggle */}
       <div className={styles.searchHeader}>
         <h1>Find Your Doctor</h1>
         <div className={styles.viewToggle}>
+          {/* Toggle buttons for list and map views */}
           <button
             className={`${styles.viewButton} ${
               viewMode === "list" ? styles.active : ""
@@ -68,12 +76,15 @@ export default function DoctorSearch() {
       </div>
 
       <div className={styles.mainContent}>
+        {/* Filter section component */}
         <FilterSection filters={filters} setFilters={setFilters} />
 
         <div className={styles.resultsContainer}>
+          {/* Conditional rendering based on view mode */}
           {viewMode === "list" ? (
             <div className={styles.doctorList}>
               {filteredDoctors.length > 0 ? (
+                // Map through filtered doctors and render DoctorCard components
                 filteredDoctors.map((doctor) => (
                   <DoctorCard
                     key={doctor.id}
@@ -84,15 +95,18 @@ export default function DoctorSearch() {
                   />
                 ))
               ) : (
+                // Display message when no doctors match the criteria
                 <div className={styles.noResults}>
                   No doctors found matching your criteria
                 </div>
               )}
             </div>
           ) : (
+            // Render MapView component when in map mode
             <MapView doctors={filteredDoctors} />
           )}
 
+          {/* Calendar section */}
           <div className={styles.calendarSection}>
             <CalendarView selectedDoctor={null} />
           </div>

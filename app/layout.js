@@ -3,6 +3,7 @@ import AppProvider from "@/context/AppContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "@/styles/globals.css";
+import "@/styles/leaflet.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
