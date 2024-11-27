@@ -10,17 +10,17 @@ export default function HomePage() {
       title: "Optimal Access to Healthcare",
       description:
         "Easily book doctor appointments onsite or via video consultation.",
-      image: "/images/feature1.png",
+      image: "/images/card-1.png",
     },
     {
       title: "Privacy Focused",
       description: "Your data is secure with us.",
-      image: "/images/feature2.png",
+      image: "/images/card-2.png",
     },
     {
       title: "24/7 Access",
       description: "Manage your health anytime, anywhere.",
-      image: "/images/feature3.png",
+      image: "/images/card-3.png",
     },
   ];
 
