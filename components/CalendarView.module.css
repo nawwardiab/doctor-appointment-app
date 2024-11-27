@@ -1,0 +1,145 @@
+.calendarView {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.calendarHeader {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.calendarHeader h2 {
+  color: #00386b;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.weekDays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.weekDay {
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  padding: 8px 0;
+}
+
+.daysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.day {
+  aspect-ratio: 1;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.day:hover:not(:disabled) {
+  background: #e2e8f0;
+}
+
+.day:disabled {
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.today {
+  background: #e2e8f0;
+  font-weight: 600;
+}
+
+.selected {
+  background: #1e88e5 !important;
+  color: white;
+}
+
+.emptyDay {
+  aspect-ratio: 1;
+}
+
+.timeSlotSection {
+  margin-top: 2rem;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1.5rem;
+}
+
+.timeSlotSection h3 {
+  color: #00386b;
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+
+.timeSlotGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.timeSlot {
+  padding: 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeSlot:hover {
+  background: #e2e8f0;
+}
+
+.selectedTime {
+  background: #1e88e5 !important;
+  color: white;
+  border-color: #1e88e5;
+}
+
+.confirmButton {
+  width: 100%;
+  padding: 12px;
+  background: #1e88e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.confirmButton:hover {
+  background: #1976d2;
+}
+
+@media (max-width: 768px) {
+  .calendarView {
+    padding: 1rem;
+  }
+
+  .day {
+    font-size: 0.875rem;
+  }
+
+  .timeSlotGrid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+}

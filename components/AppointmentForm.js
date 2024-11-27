@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useAppContext } from "@/context/AppContext";
-import Calendar from "./Calendar";
+import CalendarView from "./CalendarView";
 import Notification from "./Notification";
 import styles from "./AppointmentForm.module.css";
 
@@ -97,7 +97,7 @@ export default function AppointmentForm({ doctorId }) {
           required
         />
       </label>
-      <Calendar
+      <CalendarView
         availability={doctor?.availability || []}
         onDateSelect={handleDateSelect}
       />
