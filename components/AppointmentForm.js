@@ -1,7 +1,10 @@
 "use client";
 import { useState } from "react";
 import { useAppContext } from "@/context/AppContext";
+import Calendar from "./Calendar";
+import Notification from "./Notification";
 import styles from "./AppointmentForm.module.css";
+
 export default function AppointmentForm({ doctorId }) {
   const { state, dispatch } = useAppContext();
   const [formData, setFormData] = useState({
@@ -10,6 +13,21 @@ export default function AppointmentForm({ doctorId }) {
     userName: "",
     userEmail: "",
   });
+  const [availableTimes, setAvailableTimes] = useState([]);
+  const [notification, setNotification] = useState({ message: "", type: "" });
+
+  const handleDateSelect = (selectedDate) => {
+    setFormData({ ...formData, date: selectedDate });
+
+    // Find doctor availability for the selected date
+    const doctor = state.doctors.find((d) => d.id === doctorId);
+    if (doctor) {
+      const dateAvailability = doctor.availability.find(
+        (slot) => slot.date === selectedDate
+      );
+      setAvailableTimes(dateAvailability ? dateAvailability.times : []);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,23 +36,47 @@ export default function AppointmentForm({ doctorId }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!formData.date) {
+      setNotification({
+        message: "Please select a date for the appointment.",
+        type: "error",
+      });
+      return;
+    }
+
+    if (!formData.time) {
+      setNotification({
+        message: "Please select a time for the appointment.",
+        type: "error",
+      });
+      return;
+    }
+
     const newAppointment = {
       id: state.appointments.length + 1,
       doctorId,
       userId: state.user ? state.user.id : null,
-      date: `${formData.date}T${formData.time}:00Z`,
+      date: formData.date,
+      time: formData.time,
       status: "pending",
     };
     dispatch({
       type: "SET_APPOINTMENTS",
       payload: [...state.appointments, newAppointment],
     });
-    alert("Appointment booked successfully!");
+    setNotification({
+      message: "Appointment booked successfully!",
+      type: "success",
+    });
   };
+
+  const doctor = state.doctors.find((d) => d.id === doctorId);
 
   return (
     <form onSubmit={handleSubmit} className={styles.appointmentForm}>
-      <h1>Book an Appointment</h1>
+      <h2>Book an Appointment with {doctor?.name}</h2>
+      <Notification message={notification.message} type={notification.type} />
       <label>
         Name:
         <input
@@ -55,26 +97,32 @@ export default function AppointmentForm({ doctorId }) {
           required
         />
       </label>
-      <label>
-        Date:
-        <input
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={handleChange}
-          required
-        />
-      </label>
+      <Calendar
+        availability={doctor?.availability || []}
+        onDateSelect={handleDateSelect}
+      />
       <label>
         Time:
-        <input
-          type="time"
+        <select
           name="time"
           value={formData.time}
           onChange={handleChange}
           required
-        />
+          disabled={!formData.date || availableTimes.length === 0}
+        >
+          <option value="" disabled>
+            {availableTimes.length === 0
+              ? "No available times"
+              : "Select a time"}
+          </option>
+          {availableTimes.map((time, index) => (
+            <option key={index} value={time}>
+              {time}
+            </option>
+          ))}
+        </select>
       </label>
+
       <button>Confirm Appointment</button>
     </form>
   );

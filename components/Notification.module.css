@@ -1,0 +1,23 @@
+/* Notification.module.css */
+
+.notification {
+  padding: 16px;
+  margin: 16px 0;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.success {
+  background-color: #e6ffed;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+}
+
+.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #c62828;
+}

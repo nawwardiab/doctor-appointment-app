@@ -3,7 +3,8 @@
     "id": 1,
     "doctorId": 1,
     "userId": 2,
-    "date": "2024-11-25T09:00:00Z",
+    "date": "2024-11-25",
+    "time": "09:00",
     "status": "confirmed"
   }
 ]
