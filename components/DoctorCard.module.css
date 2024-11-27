@@ -1,0 +1,264 @@
+/* DoctorsCard.module.css */
+.doctorCard {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.doctorCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.cardHeader {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.imageContainer {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.doctorImage {
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.favoriteButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #ff4757;
+  transition: transform 0.2s;
+}
+
+.favoriteButton:hover {
+  transform: scale(1.1);
+}
+
+.headerInfo {
+  flex-grow: 1;
+}
+
+.nameSection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.nameSection h2 {
+  color: #2d3748;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.verifiedBadge {
+  color: #3182ce;
+  font-size: 1.125rem;
+}
+
+.badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.videoBadge {
+  background: #ebf8ff;
+  color: #2b6cb0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ratingSection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.starFilled {
+  color: #f6ad55;
+}
+
+.star {
+  color: #e2e8f0;
+}
+
+.rating {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.reviewCount {
+  color: #718096;
+  font-size: 0.875rem;
+}
+
+/* Add more styles for mainContent, availabilitySection, etc. */
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.bookButton {
+  background: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.bookButton:hover {
+  background: #2b6cb0;
+}
+
+@media (max-width: 768px) {
+  .cardHeader {
+    flex-direction: column;
+  }
+
+  .imageContainer {
+    width: 100%;
+    height: 200px;
+  }
+
+  .doctorImage {
+    width: 100%;
+    height: 100%;
+  }
+
+  .nameSection h2 {
+    font-size: 1.125rem;
+  }
+
+  .specialty {
+    font-size: 0.875rem;
+  }
+}
+
+.detailsSection {
+  margin: 1rem 0;
+}
+
+.detailItem {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.875rem;
+  color: #64748b; /* Muted gray for labels */
+  margin-bottom: 0.25rem;
+}
+
+.value {
+  font-size: 0.875rem;
+  color: #1a202c; /* Dark gray for values */
+}
+
+.specialty {
+  color: #64748b; /* Muted gray for specialty */
+  font-size: 0.875rem;
+  margin: 0.25rem 0;
+}
+
+.insuranceList {
+  color: #1a202c; /* Dark gray for insurance text */
+}
+
+.educationItem {
+  color: #1a202c; /* Dark gray for education text */
+  margin-bottom: 0.25rem;
+}
+
+.location {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.address {
+  color: #64748b; /* Muted gray for address */
+  font-size: 0.875rem;
+}
+
+.price {
+  color: #1a202c; /* Dark gray for price */
+  font-weight: 500;
+}
+
+.availabilitySection h3 {
+  color: #1a202c; /* Dark gray for headings */
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.quickSlots {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.slotButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: white;
+  color: #1a202c;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.slotButton:hover {
+  background: #f7fafc;
+  border-color: #cbd5e0;
+}
+
+.practicePhotos {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.photoThumbnail {
+  border-radius: 6px;
+  overflow: hidden;
+}

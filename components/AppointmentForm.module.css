@@ -2,60 +2,83 @@
 .appointmentForm {
   display: flex;
   flex-direction: column;
-  max-width: 500px; /* Set a reasonable max-width */
-  margin: 0 auto; /* Center form horizontally */
-  padding: 25px;
-  background-color: #2d2d2d; /* Background color for contrast */
-  border-radius: 10px; /* Smooth rounded corners */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Styling each label and input pair */
 .appointmentForm label {
-  margin-bottom: 10px;
-  color: #918e8e;
-  font-weight: bold;
-  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+  font-weight: 500;
+  font-size: 0.875rem;
 }
 
-.appointmentForm input {
+.appointmentForm input,
+.appointmentForm select {
   width: 100%;
-  padding: 12px;
-  margin-top: 5px;
-  margin-bottom: 20px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  padding: 0.75rem;
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
   font-size: 1rem;
-  color: #2d2d2d;
+  color: #1a202c;
+  transition: border-color 0.2s ease;
+}
+
+.appointmentForm input:focus,
+.appointmentForm select:focus {
+  outline: none;
+  border-color: #1e88e5;
+  box-shadow: 0 0 0 1px rgba(30, 136, 229, 0.2);
 }
 
 /* Styling the submit button */
 .appointmentForm button {
-  padding: 15px;
-  background-color: #0070f3;
-  color: #ffffff;
+  padding: 0.75rem;
+  background-color: #1e88e5;
+  color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 1.1rem;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: all 0.2s ease;
 }
 
 .appointmentForm button:hover {
-  background-color: #005bb5;
-  transform: translateY(-2px); /* A slight lift on hover */
+  background-color: #1976d2;
+  transform: translateY(-2px);
 }
 
 .appointmentForm button:active {
-  background-color: #003d80;
-  transform: translateY(0); /* Reset on click */
+  transform: translateY(0);
 }
 
 /* Styling for headings inside the form */
 .appointmentForm h2 {
-  color: #ffffff;
+  color: #00386b;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
   font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.appointmentForm select:disabled {
+  background-color: #f8fafc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .appointmentForm {
+    padding: 1.5rem;
+  }
+
+  .appointmentForm h2 {
+    font-size: 1.25rem;
+  }
 }

@@ -1,0 +1,71 @@
+.heroSection {
+  min-height: 500px;
+  background: linear-gradient(135deg, #00386b, #1e88e5);
+  padding: 80px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroContent {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
+
+.heroTitle {
+  color: white;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.searchContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 1rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.searchInput,
+.locationInput {
+  padding: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.searchInput:focus,
+.locationInput:focus {
+  border-color: #1e88e5;
+  outline: none;
+}
+
+.searchButton {
+  background: #1e88e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.searchButton:hover {
+  background: #1976d2;
+}
+
+@media (max-width: 768px) {
+  .searchContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .heroSection {
+    padding: 60px 16px;
+  }
+}

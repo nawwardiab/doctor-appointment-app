@@ -1,23 +1,42 @@
 /* Notification.module.css */
 
 .notification {
-  padding: 16px;
-  margin: 16px 0;
+  padding: 1rem;
   border-radius: 8px;
-  font-size: 1em;
-  font-weight: bold;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  font-weight: 500;
+  animation: slideIn 0.3s ease-out;
 }
 
 .success {
-  background-color: #e6ffed;
-  color: #2e7d32;
-  border: 1px solid #2e7d32;
+  background-color: #4caf50;
+  color: white;
 }
 
 .error {
-  background-color: #ffebee;
-  color: #c62828;
-  border: 1px solid #c62828;
+  background-color: #f44336;
+  color: white;
+}
+
+.info {
+  background-color: #2196f3;
+  color: white;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .notification {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
 }
