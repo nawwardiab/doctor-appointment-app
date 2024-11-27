@@ -1,6 +1,10 @@
 import styles from "./DoctorsCard.module.css";
 
 export default function DoctorCard({ doctor, onClick, handleBookAppointment }) {
+  if (!doctor) {
+    return null; // Render nothing if doctor prop is not provided
+  }
+
   return (
     <div className={styles.doctorCard} onClick={onClick}>
       <h2>{doctor.name}</h2>

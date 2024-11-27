@@ -40,14 +40,18 @@ export default function DoctorSearch() {
     <div className={styles.doctorSearchPage}>
       <h1>Search for Doctors</h1>
       <div className={styles.doctorList}>
-        {state.doctors.map((doctor) => (
-          <DoctorCard
-            key={doctor.id}
-            doctor={doctor}
-            onClick={() => handleDoctorClick(doctor.id)}
-            handleBookAppointment={() => handleBookAppointment(doctor.id)}
-          />
-        ))}
+        {state.doctors.length > 0 ? (
+          state.doctors.map((doctor) => (
+            <DoctorCard
+              key={doctor.id}
+              doctor={doctor}
+              onClick={() => handleDoctorClick(doctor.id)}
+              handleBookAppointment={() => handleBookAppointment(doctor.id)}
+            />
+          ))
+        ) : (
+          <p>Loading doctors...</p>
+        )}
       </div>
     </div>
   );
