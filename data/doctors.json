@@ -6,7 +6,7 @@
     "languages": ["English", "German"],
     "price": 150,
     "rating": 4.8,
-    "image": "/images/doctor1.jpg",
+    "image": "/images/doctor-1.jpeg",
     "location": {
       "address": "Friedrichstraße 140, 10117 Berlin",
       "coordinates": {
@@ -19,6 +19,14 @@
       {
         "date": "2024-11-28",
         "times": ["09:00", "11:00"]
+      },
+      {
+        "date": "2024-11-29",
+        "times": ["10:00", "15:00"]
+      },
+      {
+        "date": "2024-12-01",
+        "times": ["09:30", "13:00"]
       }
     ]
   },
@@ -29,7 +37,7 @@
     "languages": ["English", "French"],
     "price": 130,
     "rating": 4.9,
-    "image": "/images/doctor2.jpg",
+    "image": "/images/doctor-2.jpeg",
     "location": {
       "address": "Potsdamer Platz 1, 10785 Berlin",
       "coordinates": {
@@ -42,6 +50,14 @@
       {
         "date": "2024-11-29",
         "times": ["10:00", "14:00"]
+      },
+      {
+        "date": "2024-12-02",
+        "times": ["09:00", "12:00"]
+      },
+      {
+        "date": "2024-12-03",
+        "times": ["11:00", "16:00"]
       }
     ]
   }

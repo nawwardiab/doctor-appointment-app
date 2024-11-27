@@ -18,17 +18,16 @@ export default function DoctorCard({ doctor, onBookAppointment }) {
     languages = [],
     price = 0,
     rating = 0,
-    reviewCount = 0,
     image = "/default-doctor.png",
     location = { address: "" },
-    nextAvailable = "No availability",
-    education = [],
-    acceptedInsurance = [],
-    hasVideoConsultation = false,
-    isVerified = false,
-    practicePhotos = [],
-    quickSlots = [],
+    availability = [],
   } = doctor || {};
+
+  // Extract quick slots from availability
+  const quickSlots = availability.map((slot) => ({
+    date: slot.date,
+    time: slot.times[0], // Use the first available time for quick slots
+  }));
 
   return (
     <div className={styles.doctorCard}>
@@ -52,16 +51,8 @@ export default function DoctorCard({ doctor, onBookAppointment }) {
         <div className={styles.headerInfo}>
           <div className={styles.nameSection}>
             <h2>
-              {name}{" "}
-              {isVerified && <FaCheckCircle className={styles.verifiedBadge} />}
+              {name} <FaCheckCircle className={styles.verifiedBadge} />
             </h2>
-            <div className={styles.badges}>
-              {hasVideoConsultation && (
-                <span className={styles.videoBadge}>
-                  <FaVideo /> Video consultation
-                </span>
-              )}
-            </div>
           </div>
 
           <p className={styles.specialty}>{specialty}</p>
@@ -76,9 +67,8 @@ export default function DoctorCard({ doctor, onBookAppointment }) {
                   }
                 />
               ))}
-              <span className={styles.rating}>{rating}</span>
+              <span className={styles.rating}>{rating.toFixed(1)}</span>
             </div>
-            <span className={styles.reviewCount}>({reviewCount} reviews)</span>
           </div>
         </div>
       </div>
@@ -88,29 +78,6 @@ export default function DoctorCard({ doctor, onBookAppointment }) {
           <div className={styles.detailItem}>
             <span className={styles.label}>Languages</span>
             <span className={styles.value}>{languages.join(", ")}</span>
-          </div>
-          <div className={styles.detailItem}>
-            <span className={styles.label}>Education</span>
-            <span className={styles.value}>
-              {education.map((edu, index) => (
-                <div key={index} className={styles.educationItem}>
-                  {edu}
-                </div>
-              ))}
-            </span>
-          </div>
-          <div className={styles.detailItem}>
-            <span className={styles.label}>Insurance</span>
-            <span className={styles.value}>
-              {acceptedInsurance.length > 0 ? (
-                <div className={styles.insuranceList}>
-                  {acceptedInsurance.slice(0, 3).join(", ")}
-                  {acceptedInsurance.length > 3 && " + more"}
-                </div>
-              ) : (
-                "Information not available"
-              )}
-            </span>
           </div>
         </div>
 
@@ -127,20 +94,6 @@ export default function DoctorCard({ doctor, onBookAppointment }) {
               </button>
             ))}
           </div>
-        </div>
-
-        <div className={styles.practicePhotos}>
-          {practicePhotos.slice(0, 3).map((photo, index) => (
-            <div key={index} className={styles.photoThumbnail}>
-              <Image
-                src={photo}
-                alt={`Practice photo ${index + 1}`}
-                width={100}
-                height={75}
-                objectFit="cover"
-              />
-            </div>
-          ))}
         </div>
       </div>
 

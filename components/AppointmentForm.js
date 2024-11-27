@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useAppContext } from "@/context/AppContext";
-import CalendarView from "./CalendarView";
+import CalendarView from "./doctor-search/CalendarView";
 import Notification from "./Notification";
 import styles from "./AppointmentForm.module.css";
 
