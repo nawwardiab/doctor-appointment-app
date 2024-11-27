@@ -3,10 +3,10 @@ import styles from "./DoctorSearch.module.css";
 import { useEffect, useState } from "react";
 import { useAppContext } from "@/context/AppContext";
 import { useRouter } from "next/navigation";
-import DoctorCard from "@/components/DoctorCard";
-import FilterSection from "@/components/FilterSection";
-import MapView from "@/components/MapView";
-import CalendarView from "@/components/CalendarView";
+import DoctorCard from "@/components/doctor-search/DoctorCard";
+import FilterSection from "@/components/doctor-search/FilterSection";
+import MapView from "@/components/doctor-search/MapView";
+import CalendarView from "@/components/doctor-search/CalendarView";
 
 export default function DoctorSearch() {
   // Access global state and dispatch function from AppContext
