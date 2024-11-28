@@ -2,21 +2,89 @@
 
 .appointmentBookingPage {
   min-height: 100vh;
-  margin-top: 3.5rem;
   padding: 2rem;
+  margin-top: 4rem;
   background-color: #f8fafc;
 }
 
-.pageHeading {
-  color: #00386b;
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 2rem;
+.bookingContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 2rem;
 }
 
-@media (max-width: 768px) {
+.doctorDetails {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.doctorHeader {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.doctorImage {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.doctorInfo h2 {
+  color: #1a365d;
+  margin-bottom: 0.5rem;
+}
+
+.doctorInfo p {
+  color: #4a5568;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.selectedSlotInfo {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.selectedSlotInfo h3 {
+  color: #2d3748;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.slotDetails {
+  background: #f7fafc;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.slotDetails p {
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 968px) {
+  .bookingContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .doctorDetails {
+    order: -1;
+  }
+}
+
+@media (max-width: 640px) {
   .appointmentBookingPage {
     padding: 1rem;
+  }
+
+  .doctorHeader {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 }

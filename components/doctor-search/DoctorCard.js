@@ -8,9 +8,11 @@ import {
   FaStar,
 } from "react-icons/fa";
 import styles from "./DoctorCard.module.css";
+import { useRouter } from "next/navigation";
 
 export default function DoctorCard({ doctor, onBookAppointment }) {
   const [isFavorite, setIsFavorite] = useState(false);
+  const router = useRouter();
 
   const {
     name = "",
@@ -28,6 +30,12 @@ export default function DoctorCard({ doctor, onBookAppointment }) {
     date: slot.date,
     time: slot.times[0], // Use the first available time for quick slots
   }));
+
+  const handleQuickSlotSelect = (quickSlot) => {
+    // Create the URL with date and time parameters
+    const url = `/appointment-booking?doctorId=${doctor.id}&date=${quickSlot.date}&time=${quickSlot.time}`;
+    router.push(url);
+  };
 
   return (
     <div className={styles.doctorCard}>
@@ -84,13 +92,13 @@ export default function DoctorCard({ doctor, onBookAppointment }) {
         <div className={styles.availabilitySection}>
           <h3>Next Available Slots</h3>
           <div className={styles.quickSlots}>
-            {quickSlots.map((slot, index) => (
+            {quickSlots.map((quickSlot, index) => (
               <button
                 key={index}
                 className={styles.slotButton}
-                onClick={() => onBookAppointment(slot)}
+                onClick={() => handleQuickSlotSelect(quickSlot)}
               >
-                {slot.date} - {slot.time}
+                {quickSlot.date} - {quickSlot.time}
               </button>
             ))}
           </div>
@@ -104,7 +112,7 @@ export default function DoctorCard({ doctor, onBookAppointment }) {
         </div>
         <button
           className={styles.bookButton}
-          onClick={() => onBookAppointment()}
+          onClick={() => onBookAppointment(doctor)}
         >
           Book Appointment
         </button>
