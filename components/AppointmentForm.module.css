@@ -2,7 +2,7 @@
 .appointmentForm {
   display: flex;
   flex-direction: column;
-  max-width: 500px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   background-color: white;
@@ -81,4 +81,788 @@
   .appointmentForm h2 {
     font-size: 1.25rem;
   }
+}
+
+.stepper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.stepper span {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  color: #4a5568;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  font-weight: bold;
+}
+
+.activeStep {
+  background-color: #1e88e5;
+  color: white;
+}
+
+.formStep {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.calendarSection {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.timeSlots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.timeSlot {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeSlot:hover {
+  background-color: #f7fafc;
+  border-color: #2196f3;
+}
+
+.timeSlot.selected {
+  background-color: #2196f3;
+  color: white;
+  border-color: #2196f3;
+}
+
+.hideCalendarButton {
+  margin-bottom: 1rem;
+  background-color: #f7fafc;
+  color: #4a5568;
+}
+
+.hideCalendarButton:hover {
+  background-color: #edf2f7;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.backButton {
+  background-color: #2196f3;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  font-weight: 400;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.nextButton,
+.seeDetailsButton,
+.confirmButton {
+  background-color: #2196f3;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  font-weight: 400;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.nextButton:hover,
+.seeDetailsButton:hover,
+.confirmButton:hover {
+  background-color: #1976d2;
+}
+
+.confirmButton {
+  background-color: #2196f3;
+  font-weight: 500;
+}
+
+.seeDetailsButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Disabled state */
+.nextButton:disabled,
+.seeDetailsButton:disabled,
+.confirmButton:disabled {
+  background-color: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.timeSlotGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.timeSlot {
+  padding: 0.75rem;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: white;
+  color: #2d3748;
+  font-size: 0.9rem;
+}
+
+.timeSlot:hover {
+  background-color: #f0f7ff;
+  border-color: #1e88e5;
+  transform: translateY(-1px);
+}
+
+.timeSlot.selected {
+  background-color: #1e88e5;
+  color: white;
+  border-color: #1e88e5;
+  font-weight: 500;
+}
+
+.slotOptions {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.confirmationDetails {
+  background-color: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+.confirmationDetails p {
+  margin-bottom: 0.75rem;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.confirmationDetails strong {
+  color: #2d3748;
+  margin-right: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .formActions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .backButton,
+  .nextButton {
+    width: 100%;
+  }
+}
+
+.currentSelection {
+  background-color: #f0f7ff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #e3f2fd;
+}
+
+.currentSelection h3 {
+  color: #1e88e5;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.currentSelection p {
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+}
+
+.selectedDateTime {
+  margin-bottom: 1rem;
+}
+
+.selectedDateTime h3 {
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.selectedDateTime p {
+  color: #4a5568;
+  margin-bottom: 0.25rem;
+}
+
+.nextButton:disabled {
+  background-color: #cbd5e0;
+  cursor: not-allowed;
+}
+
+.nextButton:disabled:hover {
+  transform: none;
+  background-color: #cbd5e0;
+}
+
+.appointmentDetails {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.appointmentDetails h3 {
+  color: #2d3748;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.timeDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.timeDetails p {
+  color: #4a5568;
+  font-size: 0.95rem;
+}
+
+.timeDetails strong {
+  color: #2d3748;
+  margin-right: 0.5rem;
+}
+
+.appointmentSelection {
+  padding: 1rem 0;
+}
+
+.calendarToggle {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.selectTimeButton {
+  background-color: #1e88e5;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.selectTimeButton:hover {
+  background-color: #1976d2;
+  transform: translateY(-1px);
+}
+
+.backToQuickSlots {
+  background-color: transparent;
+  color: #4a5568;
+  padding: 0.5rem 1rem;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.backToQuickSlots:hover {
+  color: #2d3748;
+}
+
+.timeSlotSection {
+  margin-top: 1.5rem;
+}
+
+.timeSlotSection h4 {
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.timeSlotGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.timeSlot {
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeSlot:hover {
+  border-color: #1e88e5;
+  background-color: #f0f7ff;
+}
+
+.timeSlot.selected {
+  background-color: #1e88e5;
+  color: white;
+  border-color: #1e88e5;
+  font-weight: 500;
+}
+
+.confirmTimeButton {
+  background-color: #1e88e5;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.confirmTimeButton:hover {
+  background-color: #1976d2;
+}
+
+.selectedAppointment {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.appointmentDetails {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.appointmentDetails p {
+  margin: 0.5rem 0;
+  color: #4a5568;
+}
+
+.appointmentDetails strong {
+  color: #2d3748;
+  margin-right: 0.5rem;
+}
+
+.appointmentActions {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.changePrompt {
+  color: #4a5568;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.changeTimeButton {
+  background-color: #e2e8f0;
+  color: #4a5568;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.changeTimeButton:hover {
+  background-color: #cbd5e0;
+}
+
+.calendarContainer {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.timeSlotSection {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.timeSlotSection h4 {
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.timeSlotGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.75rem;
+}
+
+.timeSlot {
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeSlot:hover {
+  border-color: #1e88e5;
+  background-color: #f0f7ff;
+}
+
+.timeSlot.selected {
+  background-color: #1e88e5;
+  color: white;
+  border-color: #1e88e5;
+}
+
+.formStep {
+  margin: 1.5rem 0;
+}
+
+.newTimeConfirmation {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.newTimeDetails {
+  margin-bottom: 1rem;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.newTimeDetails strong {
+  display: block;
+  color: #2d3748;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.confirmTimeButton {
+  background-color: #1e88e5;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.confirmTimeButton:hover {
+  background-color: #1976d2;
+}
+
+.stepIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.stepNumber {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.stepLabel {
+  font-size: 0.875rem;
+  color: #64748b;
+  transition: all 0.3s ease;
+}
+
+.step.active .stepNumber {
+  background-color: #1e88e5;
+  color: white;
+}
+
+.step.active .stepLabel {
+  color: #1e88e5;
+  font-weight: 500;
+}
+
+.stepDivider {
+  width: 60px;
+  height: 2px;
+  background-color: #e2e8f0;
+  margin: 0 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.step.active + .stepDivider {
+  background-color: #1e88e5;
+}
+
+@media (max-width: 640px) {
+  .stepLabel {
+    font-size: 0.75rem;
+  }
+
+  .stepDivider {
+    width: 30px;
+  }
+
+  .stepNumber {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.confirmationBox {
+  background-color: white;
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.confirmationBox h3 {
+  color: #2d3748;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.confirmationDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.appointmentInfo,
+.patientInfo,
+.doctorInfo {
+  background-color: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.appointmentInfo h4,
+.patientInfo h4,
+.doctorInfo h4 {
+  color: #1e88e5;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.confirmationDetails p {
+  margin-bottom: 0.75rem;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.confirmationDetails strong {
+  color: #2d3748;
+  font-weight: 500;
+  margin-right: 0.5rem;
+}
+
+.notification {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1rem 2.5rem 1rem 1.5rem;
+  border-radius: 4px;
+  color: white;
+  font-size: 0.875rem;
+  z-index: 1000;
+  animation: slideDown 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notification.success {
+  background-color: #4caf50;
+}
+
+.notification.error {
+  background-color: #f44336;
+}
+
+.closeNotification {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.closeNotification:hover {
+  opacity: 1;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translate(-50%, -100%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+/* Optional: Add a container for notifications to handle multiple messages */
+.notificationContainer {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 90%;
+  max-width: 400px;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.selectDifferentTimeButton {
+  background-color: #2196f3;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  font-weight: 400;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.selectDifferentTimeButton:hover {
+  background-color: #1976d2;
+}
+
+.seeDetailsButton {
+  background-color: #2196f3;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  font-weight: 400;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.seeDetailsButton:hover {
+  background-color: #1976d2;
+}
+
+.appointmentDetails {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.changePrompt {
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.formField {
+  margin-bottom: 1.5rem;
+}
+
+.formField label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+  font-size: 0.875rem;
+}
+
+.select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: #2d3748;
+  background-color: white;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 1px #2196f3;
+}
+
+.select option {
+  padding: 0.5rem;
 }

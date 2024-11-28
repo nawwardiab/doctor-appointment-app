@@ -9,6 +9,23 @@ const initialState = {
   user: null,
   doctors: [],
   appointments: [],
+  selectedDoctor: null,
+  selectedSlot: null,
+  viewMode: "list",
+  searchFilters: {
+    specialty: "",
+    language: "",
+    availability: "",
+    maxPrice: "",
+    location: "",
+    searchQuery: "",
+  },
+  bookingData: {
+    visitedBefore: "",
+    purpose: "",
+    selectedDate: null,
+    selectedTime: null,
+  },
 };
 
 // Create Reducer
@@ -20,6 +37,38 @@ function reducer(state, action) {
       return { ...state, doctors: action.payload };
     case "SET_APPOINTMENTS":
       return { ...state, appointments: action.payload };
+    case "SET_SELECTED_DOCTOR":
+      return { ...state, selectedDoctor: action.payload };
+    case "SET_SELECTED_SLOT":
+      return { ...state, selectedSlot: action.payload };
+    case "SET_SEARCH_FILTERS":
+      return {
+        ...state,
+        searchFilters: { ...state.searchFilters, ...action.payload },
+      };
+    case "SET_BOOKING_DATA":
+      return {
+        ...state,
+        bookingData: { ...state.bookingData, ...action.payload },
+      };
+    case "RESET_BOOKING_DATA":
+      return {
+        ...state,
+        bookingData: initialState.bookingData,
+        selectedSlot: null,
+      };
+    case "SET_VIEW_MODE":
+      return { ...state, viewMode: action.payload };
+    case "SYNC_SELECTED_SLOT":
+      return {
+        ...state,
+        selectedSlot: action.payload,
+        bookingData: {
+          ...state.bookingData,
+          selectedDate: action.payload?.date || null,
+          selectedTime: action.payload?.time || null,
+        },
+      };
     default:
       return state;
   }

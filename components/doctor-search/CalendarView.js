@@ -1,41 +1,58 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./CalendarView.module.css";
 
-export default function CalendarView({ selectedDoctor }) {
+export default function CalendarView({
+  selectedDoctor,
+  onDateSelect,
+  availableDates = [],
+}) {
+  const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
 
-  const today = new Date();
-  const currentMonth = today.getMonth();
-  const currentYear = today.getFullYear();
+  const isDateAvailable = (dateString) => {
+    if (!Array.isArray(availableDates)) return false;
+    return availableDates.includes(dateString);
+  };
 
-  const getDaysInMonth = (month, year) =>
-    new Date(year, month + 1, 0).getDate();
-  const getFirstDayOfMonth = (month, year) => new Date(year, month, 1).getDay();
+  const getDaysInMonth = (date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDayOfMonth = new Date(year, month, 1).getDay();
+    return { daysInMonth, firstDayOfMonth };
+  };
 
-  const generateCalendarDays = () => {
-    const daysInMonth = getDaysInMonth(currentMonth, currentYear);
-    const firstDay = getFirstDayOfMonth(currentMonth, currentYear);
+  const renderCalendar = () => {
+    const { daysInMonth, firstDayOfMonth } = getDaysInMonth(currentMonth);
     const days = [];
+    const year = currentMonth.getFullYear();
+    const month = (currentMonth.getMonth() + 1).toString().padStart(2, "0");
 
-    for (let i = 0; i < firstDay; i++) {
+    // Add empty cells for days before the first day of the month
+    for (let i = 0; i < firstDayOfMonth; i++) {
       days.push(<div key={`empty-${i}`} className={styles.emptyDay}></div>);
     }
 
+    // Add days of the month
     for (let day = 1; day <= daysInMonth; day++) {
-      const date = new Date(currentYear, currentMonth, day);
-      const isToday = today.toDateString() === date.toDateString();
-      const isSelected = selectedDate?.toDateString() === date.toDateString();
+      const dateString = `${year}-${month}-${day.toString().padStart(2, "0")}`;
+      const available = isDateAvailable(dateString);
+      const isSelected = dateString === selectedDate;
 
       days.push(
         <button
-          key={day}
-          className={`${styles.day} ${isToday ? styles.today : ""} ${
-            isSelected ? styles.selected : ""
-          }`}
-          onClick={() => handleDateSelect(date)}
-          disabled={date < today}
+          key={dateString}
+          onClick={() => {
+            if (available) {
+              setSelectedDate(dateString);
+              onDateSelect(dateString);
+            }
+          }}
+          className={`${styles.day} 
+            ${available ? styles.available : styles.unavailable}
+            ${isSelected ? styles.selected : ""}`}
+          disabled={!available}
         >
           {day}
         </button>
@@ -45,80 +62,44 @@ export default function CalendarView({ selectedDoctor }) {
     return days;
   };
 
-  const generateTimeSlots = () => {
-    if (!selectedDate || !selectedDoctor) return [];
-
-    const availability = selectedDoctor.availability.find(
-      (slot) =>
-        new Date(slot.date).toDateString() === selectedDate.toDateString()
-    );
-
-    if (!availability) return [];
-
-    return availability.times.map((time) => (
-      <button
-        key={time}
-        className={`${styles.timeSlot} ${
-          selectedTime === time ? styles.selectedTime : ""
-        }`}
-        onClick={() => setSelectedTime(time)}
-      >
-        {time}
-      </button>
-    ));
-  };
-
-  const handleDateSelect = (date) => {
-    setSelectedDate(date);
-    setSelectedTime(null);
-  };
-
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
   return (
-    <div className={styles.calendarView}>
-      <div className={styles.calendarHeader}>
-        <h2>
-          {monthNames[currentMonth]} {currentYear}
-        </h2>
+    <div className={styles.calendar}>
+      <div className={styles.header}>
+        <button
+          onClick={() =>
+            setCurrentMonth(
+              new Date(currentMonth.setMonth(currentMonth.getMonth() - 1))
+            )
+          }
+          className={styles.monthButton}
+        >
+          ←
+        </button>
+        <h3>
+          {currentMonth.toLocaleDateString("en-US", {
+            month: "long",
+            year: "numeric",
+          })}
+        </h3>
+        <button
+          onClick={() =>
+            setCurrentMonth(
+              new Date(currentMonth.setMonth(currentMonth.getMonth() + 1))
+            )
+          }
+          className={styles.monthButton}
+        >
+          →
+        </button>
       </div>
-
-      <div className={styles.weekDays}>
+      <div className={styles.weekdays}>
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-          <div key={day} className={styles.weekDay}>
+          <div key={day} className={styles.weekday}>
             {day}
           </div>
         ))}
       </div>
-
-      <div className={styles.daysGrid}>{generateCalendarDays()}</div>
-
-      {selectedDate && (
-        <div className={styles.timeSlotSection}>
-          <h3>Available Times for {selectedDate.toLocaleDateString()}</h3>
-          <div className={styles.timeSlotGrid}>{generateTimeSlots()}</div>
-        </div>
-      )}
-
-      {selectedTime && (
-        <button className={styles.confirmButton}>
-          Confirm Appointment for {selectedDate.toLocaleDateString()} at{" "}
-          {selectedTime}
-        </button>
-      )}
+      <div className={styles.days}>{renderCalendar()}</div>
     </div>
   );
 }
