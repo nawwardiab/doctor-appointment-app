@@ -23,10 +23,20 @@
     - appointments.js
     - users.js
 3.  /components
-    - DoctorCard.js
-    - DoctorCard.css
+    - /doctor-search
+      - CalendarView.js
+      - DoctorCard.js
+      - FilterSection.js
+      - MapComponent.js
+      - MapView.js
+    - /home-page
+      - CTASection.js
+      - HeroSection.js
+      - InfoCard.js
+    - Navbar.js
+    - Footer.js
+    - SearchFilters.js
     - AppointmentForm.js
-    - Calendar.js
     - Notification.js
 4.  /data
     - doctors.json
