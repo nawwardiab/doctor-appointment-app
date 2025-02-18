@@ -204,6 +204,3 @@ For any questions, feel free to reach out!
 📧 **LinkedIn:** [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/nawwar-diab/)  
 🔗 **GitHub:** [Nawwar Diab](https://github.com/nawwardiab)
 
----
-
-Would you like me to adjust anything based on the roadmap or other missing details? 🚀
