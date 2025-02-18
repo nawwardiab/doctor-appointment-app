@@ -1,4 +1,5 @@
-"use client";
+"use client"; // Marks this as a client-side component
+
 import { useState, useEffect } from "react";
 import { useAppContext } from "@/context/AppContext";
 import CalendarView from "./doctor-search/CalendarView";
@@ -6,19 +7,20 @@ import Notification from "./Notification";
 import styles from "./AppointmentForm.module.css";
 
 export default function AppointmentForm({ doctorId, selectedSlot }) {
+  // Initialize state variables
   const { state, dispatch } = useAppContext();
-  const [step, setStep] = useState(1);
-  const [notification, setNotification] = useState({ message: "", type: "" });
-  const [showCalendar, setShowCalendar] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
-  const [initialSlotSet, setInitialSlotSet] = useState(false);
-  const [isChangingTime, setIsChangingTime] = useState(false);
+  const [step, setStep] = useState(1); // Current form step
+  const [notification, setNotification] = useState({ message: "", type: "" }); // Notification state
+  const [showCalendar, setShowCalendar] = useState(false); // Calendar visibility
+  const [selectedDate, setSelectedDate] = useState(null); // Selected appointment date
+  const [availableTimeSlots, setAvailableTimeSlots] = useState([]); // Available time slots
+  const [initialSlotSet, setInitialSlotSet] = useState(false); // Track if initial slot is set
+  const [isChangingTime, setIsChangingTime] = useState(false); // Track if user is changing time
 
   const { bookingData } = state;
   const doctor = state.doctors.find((d) => d.id === parseInt(doctorId));
 
-  // Update handleChange to work with form fields
+  // Handle form field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch({
@@ -30,7 +32,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     });
   };
 
-  // Initialize booking data when component mounts with selected slot
+  // Initialize booking data when component mounts
   useEffect(() => {
     if (!initialSlotSet && selectedSlot && doctor) {
       dispatch({
@@ -42,21 +44,21 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     }
   }, [selectedSlot, doctor, dispatch, initialSlotSet]);
 
-  const totalSteps = selectedSlot ? 2 : 3;
+  const totalSteps = selectedSlot ? 2 : 3; // Determine total steps based on slot selection
 
+  // Handle date selection
   const handleDateSelect = (date) => {
     console.log("Date selected:", date);
     setSelectedDate(date);
 
     if (doctor?.availability) {
-      // Find the availability entry for the selected date
+      // Find available time slots for selected date
       const dateAvailability = doctor.availability.find(
         (slot) => slot.date === date
       );
       console.log("Date availability:", dateAvailability);
 
       if (dateAvailability) {
-        // Set the available times for that date
         setAvailableTimeSlots(dateAvailability.times);
         console.log("Setting available times:", dateAvailability.times);
       } else {
@@ -65,6 +67,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     }
   };
 
+  // Handle time slot selection
   const handleTimeSelect = (timeValue) => {
     console.log("Time slot selected:", timeValue);
     console.log("Selected date:", selectedDate);
@@ -74,7 +77,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
       return;
     }
 
-    // Create the new slot
+    // Create new appointment slot
     const newSlot = {
       date: selectedDate,
       time: timeValue,
@@ -85,7 +88,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
 
     console.log("Created new slot:", newSlot);
 
-    // Update both states
+    // Update booking data in global state
     dispatch({
       type: "SET_BOOKING_DATA",
       payload: {
@@ -95,12 +98,14 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
       },
     });
 
+    // Sync selected slot in global state
     dispatch({
       type: "SYNC_SELECTED_SLOT",
       payload: newSlot,
     });
   };
 
+  // Handle viewing booking details
   const handleSeeBookingDetails = () => {
     const newSlot = {
       date: selectedDate,
@@ -120,6 +125,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     setStep(3);
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -128,7 +134,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
       return;
     }
 
-    // Only handle submission in step 3
+    // Handle final submission in step 3
     if (step === 3) {
       try {
         // Here you would typically make an API call to save the appointment
@@ -145,7 +151,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     }
   };
 
-  // Update canSeeBookingDetails validation
+  // Validate if booking details can be viewed
   const canSeeBookingDetails = () => {
     console.log("Checking can see booking details:");
     console.log("Is changing time:", isChangingTime);
@@ -158,7 +164,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     return state.selectedSlot != null;
   };
 
-  // Update renderTimeSlots to handle the array of times
+  // Render available time slots
   const renderTimeSlots = () => {
     console.log("Rendering time slots:", {
       selectedDate,
@@ -190,7 +196,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     );
   };
 
-  // Update renderStepOne to use handleChange
+  // Render step one of the form
   const renderStepOne = () => {
     return (
       <div className={styles.formStep}>
@@ -230,6 +236,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     );
   };
 
+  // Render step two of the form
   const renderStepTwo = () => {
     const activeSlot = state.selectedSlot;
 
@@ -284,6 +291,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     );
   };
 
+  // Render step three of the form (confirmation)
   const renderStepThree = () => {
     const currentSlot = state.selectedSlot;
 
@@ -337,6 +345,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     );
   };
 
+  // Validate if form can proceed to next step
   const canProceed = () => {
     if (step === 1) {
       return bookingData.visitedBefore && bookingData.purpose;
@@ -350,7 +359,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     return true;
   };
 
-  // Update the button text function
+  // Get button text based on current step
   const getButtonText = () => {
     if (step === 3) {
       return "Confirm Appointment";
@@ -358,7 +367,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     return "Next";
   };
 
-  // Update the button class based on step
+  // Get button class based on current step
   const getButtonClass = () => {
     if (step === 3) {
       return styles.confirmButton;
@@ -369,7 +378,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     return styles.nextButton;
   };
 
-  // Add back button handler
+  // Handle back button click
   const handleBack = () => {
     if (step > 1) {
       if (isChangingTime && step === 2) {
@@ -396,7 +405,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     }
   };
 
-  // Add debug logging to help identify the issue
+  // Debug logging
   useEffect(() => {
     console.log("Current step:", step);
     console.log("Selected slot:", selectedSlot);
@@ -404,7 +413,7 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     console.log("Can proceed:", canProceed());
   }, [step, selectedSlot, bookingData]);
 
-  // Add step indicator component
+  // Step indicator component
   const StepIndicator = () => {
     return (
       <div className={styles.stepIndicator}>
@@ -426,15 +435,10 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
     );
   };
 
-  // Add logging to see the structure of doctor data
-  useEffect(() => {
-    console.log("Doctor data:", doctor);
-    console.log("Doctor availability:", doctor?.availability);
-  }, [doctor]);
-
-  // Update the main render function to properly show all steps
+  // Main render
   return (
     <form onSubmit={handleSubmit} className={styles.appointmentForm}>
+      {/* Display notifications if any */}
       {notification.message && (
         <div className={`${styles.notification} ${styles[notification.type]}`}>
           {notification.message}
@@ -448,12 +452,15 @@ export default function AppointmentForm({ doctorId, selectedSlot }) {
         </div>
       )}
 
+      {/* Display step indicator */}
       <StepIndicator />
 
+      {/* Render appropriate step content */}
       {step === 1 && renderStepOne()}
       {step === 2 && renderStepTwo()}
       {step === 3 && renderStepThree()}
 
+      {/* Form action buttons */}
       <div className={styles.formActions}>
         {step > 1 && (
           <button

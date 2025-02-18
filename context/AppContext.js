@@ -1,34 +1,36 @@
 "use client";
 import { createContext, useReducer, useContext } from "react";
 
-// Create Context
+// Create a new Context object for the application state
 const AppContext = createContext();
 
-// Initialize the State
+// Define the initial state structure for the application
 const initialState = {
-  user: null,
-  doctors: [],
-  appointments: [],
-  selectedDoctor: null,
-  selectedSlot: null,
-  viewMode: "list",
+  user: null, // Stores current user information
+  doctors: [], // List of all doctors
+  appointments: [], // List of user's appointments
+  selectedDoctor: null, // Currently selected doctor
+  selectedSlot: null, // Selected appointment time slot
+  viewMode: "list", // Display mode for doctor search (list/map)
   searchFilters: {
-    specialty: "",
-    language: "",
-    availability: "",
-    maxPrice: "",
-    location: "",
-    searchQuery: "",
+    // Filters for doctor search
+    specialty: "", // Doctor's specialty
+    language: "", // Preferred language
+    availability: "", // Desired appointment date
+    maxPrice: "", // Maximum price filter
+    location: "", // Location preference
+    searchQuery: "", // Search text input
   },
   bookingData: {
-    visitedBefore: "",
-    purpose: "",
-    selectedDate: null,
-    selectedTime: null,
+    // Appointment booking information
+    visitedBefore: "", // Whether patient has visited before
+    purpose: "", // Purpose of visit
+    selectedDate: null, // Selected appointment date
+    selectedTime: null, // Selected appointment time
   },
 };
 
-// Create Reducer
+// Reducer function to handle state updates
 function reducer(state, action) {
   switch (action.type) {
     case "SET_USER":
@@ -52,6 +54,7 @@ function reducer(state, action) {
         bookingData: { ...state.bookingData, ...action.payload },
       };
     case "RESET_BOOKING_DATA":
+      // Reset booking data to initial state
       return {
         ...state,
         bookingData: initialState.bookingData,
@@ -60,6 +63,7 @@ function reducer(state, action) {
     case "SET_VIEW_MODE":
       return { ...state, viewMode: action.payload };
     case "SYNC_SELECTED_SLOT":
+      // Synchronize selected slot with booking data
       return {
         ...state,
         selectedSlot: action.payload,
@@ -74,8 +78,9 @@ function reducer(state, action) {
   }
 }
 
-// Create and export Context Provider
+// Context Provider component
 export default function AppProvider({ children }) {
+  // Initialize state with reducer
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
@@ -85,7 +90,7 @@ export default function AppProvider({ children }) {
   );
 }
 
-// Create and export custom context hook to easily access state and dispatch functions
+// Custom hook to use the AppContext
 export function useAppContext() {
   return useContext(AppContext);
 }
