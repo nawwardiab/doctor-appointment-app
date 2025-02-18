@@ -102,7 +102,7 @@ A **Next.js**-powered doctor appointment booking system that allows users to sea
 ### 📥 Clone the Repository
 
 ```sh
-git clone https://github.com/yourusername/doctor-appointment-app.git
+git clone https://github.com/nawwardiab/doctor-appointment-app.git
 cd doctor-appointment-app
 ```
 
@@ -201,8 +201,8 @@ Want to improve this project? Contributions are welcome!
 
 For any questions, feel free to reach out!
 
-📧 **Email:** `your-email@example.com`  
-🔗 **GitHub:** [your-github-profile](https://github.com/yourusername)
+📧 **LinkedIn:** [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/nawwar-diab/)  
+🔗 **GitHub:** [Nawwar Diab](https://github.com/nawwardiab)
 
 ---
 
